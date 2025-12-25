@@ -1,4 +1,4 @@
-- name: Configure VM and deploy OpenWebUI (CLI-based, SDK-free)
+- name: Configure VM and deploy OpenWebUI (persistent)
   hosts: openwebui
   become: yes
 
@@ -28,6 +28,14 @@
         enabled: yes
         state: started
 
+    - name: Create OpenWebUI data directory
+      file:
+        path: /opt/openwebui-data
+        state: directory
+        owner: azureuser
+        group: azureuser
+        mode: '0755'
+
     - name: Copy OpenWebUI env file
       copy:
         src: .env
@@ -40,11 +48,12 @@
       shell: |
         docker rm -f openwebui || true
 
-    - name: Run OpenWebUI container (Docker CLI)
+    - name: Run OpenWebUI container with persistent volume
       shell: |
         docker run -d \
           --name openwebui \
           --restart always \
           -p 3000:8080 \
+          -v /opt/openwebui-data:/app/backend/data \
           --env-file /home/azureuser/openwebui.env \
           ghcr.io/open-webui/open-webui:latest
