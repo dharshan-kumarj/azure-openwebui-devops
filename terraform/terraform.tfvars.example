@@ -1,0 +1,4 @@
+# Example Terraform variables
+# Copy this file to terraform.tfvars and fill in your values
+
+ssh_public_key_path = "/path/to/your/.ssh/id_rsa.pub"
