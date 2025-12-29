@@ -1,5 +1,5 @@
 
-### Noesis 
+### Praxis 
 
 This project demonstrates a **complete DevOps lifecycle** for deploying **OpenWebUI** on Microsoft Azure — starting from **infrastructure provisioning using Terraform**, followed by **configuration management**, **containerization**, and **fully automated CI/CD using Jenkins**.
 
